@@ -1,0 +1,33 @@
+###################################
+# Syntax Coloring Map For AnalogKeyPad
+###################################
+
+###################################
+# Datatypes (KEYWORD1)
+###################################
+
+MenuPCD8544	KEYWORD1
+menuItem_t	KEYWORD1
+menu_t	KEYWORD1
+
+###################################
+# Methods and Functions (KEYWORD2)
+###################################
+
+begin	KEYWORD2
+stop	KEYWORD2
+navigate	KEYWORD2
+display	KEYWORD2
+clear	KEYWORD2
+setStatus	KEYWORD2
+clearStatus	KEYWORD2
+canceled	KEYWORD2
+
+###################################
+# Constants (LITERAL1)
+###################################
+
+
+
+
+
