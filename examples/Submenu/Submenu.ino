@@ -1,6 +1,15 @@
-#include <PCD8544.h>
+#include <SPI.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_PCD8544.h>
 #include <AnalogKeyPad.h>
 #include <MenuPCD8544.h>
+
+#define ANALOGKEYPADPIN A2
+#define DISPLAYSCKPIN   2
+#define DISPLAYDINPIN   3
+#define DISPLAYDCPIN    7
+#define DISPLAYCSPIN    4
+#define DISPLAYRSTPIN   5
 
 /*******************************************************************
  * Definition of the "Speed" submenu
@@ -67,8 +76,8 @@ const menu_t menuRoot PROGMEM =
 { NUM_MAIN_MENU_ITEMS, menuMainItems };
     
 
-PCD8544 lcd;
-AnalogKeyPad keypad(A0);
+Adafruit_PCD8544 lcd = Adafruit_PCD8544(DISPLAYSCKPIN, DISPLAYDINPIN, DISPLAYDCPIN, DISPLAYCSPIN, DISPLAYRSTPIN);
+AnalogKeyPad keypad(ANALOGKEYPADPIN);
 MenuPCD8544 menuMain(&menuRoot);
 
 const uint8_t LEDpin = 13;
@@ -102,7 +111,7 @@ menuFunc_t taskMenu()
 
     if ( (keyCode = keypad.keyUpEvent()) != AnalogKeyPad::NO_KEY )       // was key pressed?
     {
-        lcd.clearStatus();                     // clear the status line
+        //lcd.clearStatus();                     // clear the status line
         // valid input keycodes: U,D,L,R,S - Up, Down, Left, Right, Select
         // returns true if menu item was selected and *doit holds the associated function pointer
         int8_t selected = menuMain.navigate(keyCode, &doit);
@@ -110,9 +119,9 @@ menuFunc_t taskMenu()
         if (selected)               		        // user selected the menu item
         {   if (doit == MenuPCD8544::canceled)      // check that the menu was not canceled
             {   doit = NULL;
-                lcd.setStatus(F("menu canceled"));
+                //lcd.setStatus(F("menu canceled"));
                 delay(2000);                        // bad, this will prevent other tasks from running
-                lcd.clearStatus();
+                //lcd.clearStatus();
             }
             menuMain.begin(&lcd);                   // show the menu again
         }
@@ -142,14 +151,14 @@ void onFunc()
 	Serial.println(F("do On"));
     digitalWrite(LEDpin, 1);
     blinking = 0;
-	lcd.setStatus(F("LED on"));
+	//lcd.setStatus(F("LED on"));
 }
 
 void blinkFunc()
 {
 	Serial.println(F("do Blink"));
     blinking = 1;                            // LED blink interval in msec, used by manageBlinking() 
-	lcd.setStatus(F("LED blink"));
+	//lcd.setStatus(F("LED blink"));
 }
 
 
@@ -158,28 +167,28 @@ void offFunc()
 	Serial.println(F("do Off"));
     digitalWrite(LEDpin, 0);
     blinking = 0;
-	lcd.setStatus(F("LED off"));
+	//lcd.setStatus(F("LED off"));
 }
 
 void slowFunc()
 {
 	Serial.println(F("do Slow"));
     blinkInterval = 750;
-    lcd.setStatus(F("speed slow"));
+    //lcd.setStatus(F("speed slow"));
 }
 
 void mediumFunc()
 {
 	Serial.println(F("do Medium"));
     blinkInterval = 300;
-    lcd.setStatus(F("speed medium"));
+    //lcd.setStatus(F("speed medium"));
 }
 
 void fastFunc()
 {
 	Serial.println(F("do Fast"));
     blinkInterval = 100;
-    lcd.setStatus(F("speed fast"));
+    //lcd.setStatus(F("speed fast"));
 }
 
 
