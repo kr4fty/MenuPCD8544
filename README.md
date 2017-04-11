@@ -1,6 +1,6 @@
 Fork of the library made by oryshed (oryshed dot gmail dot com)
 
-**Original**: [http://www.oryshed.com/arduino/lcd-48x84-shield] (http://www.oryshed.com/arduino/lcd-48x84-shield)
+**Original**: [http://www.oryshed.com/arduino/lcd-48x84-shield](http://www.oryshed.com/arduino/lcd-48x84-shield)
 
 Requires the [PCD8544 library](https://github.com/adafruit/Adafruit-PCD8544-Nokia-5110-LCD-library) (display handling) and the [AnalogKeyPad library](https://github.com/kr4fty/AnalogKeyPad) (key input for menu navigation) mentioned above (optional).
 
